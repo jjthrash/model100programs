@@ -1,0 +1,80 @@
+0 CLS
+1 'TERMINAL
+10 PRINT@0,"QWERTY Terminal"
+20 LF$=LEFT$(TIME$,5)
+30 IF LEFT$(LF$,1)="0" THEN LF$=RIGHT$(LF$,4)
+40 PRINT "["+LF$+"]"
+50 LINE INPUT "==>";L$
+60 IF LEFT$(L$,4)="say " THEN PRINT RIGHT$(L$,LEN(L$)-4) ELSE 70:GOTO 50000
+70 IF L$="time" THEN PRINT TIME$ ELSE GOTO 80:GOTO 50000
+80 IF L$="date" THEN PRINT DAY$+"-"+DATE$ ELSE GOTO 90:GOTO 50000
+90 IF L$="mem f" THEN PRINT FRE(0) ELSE 95:GOTO 50000
+95 MEMU=37268-FRE(0)
+100 IF L$="mem u" THEN PRINT MEMU ELSE GOTO 105:GOTO 50000
+105 MEMT=37268
+110 IF L$="mem t" THEN PRINT MEMT ELSE GOTO 120:GOTO 50000
+120 IF L$="calc" THEN 130 ELSE 160:GOTO 50000
+130 PRINT " Press F4"
+140 LOAD "Calc.ba"
+160 IF LEFT$(L$,4)="beep" THEN 170 ELSE 210:GOTO 50000
+170 INPUT "Frequency";F
+180 INPUT "Length";LE
+190 SOUND F,LE
+200 GOTO 50000
+210 IF L$="ping" THEN PRINT "PONG!" ELSE GOTO 220:GOTO 50000
+220 IF LEFT$(L$,6)="hello " THEN 230 ELSE 270
+230 L$=RIGHT$(L$,LEN(L$)-6):PRINT "Hi, "+L$+"!":GOTO 50000
+270 IF LEFT$(L$,5)="bday " THEN B$=RIGHT$(L$,LEN(L$)-5) ELSE GOTO 300:GOTO 280
+280 PRINT "Happy Birthday, "+B$+"!":GOTO 50000
+300 IF L$="menu" THEN MENU ELSE 310
+310 IF L$="quit" THEN 320 ELSE 340
+320 PRINT "Quitting...":FOR I=1 TO 1000:NEXT
+330 END
+340 IF L$="clear" THEN GOTO 0 ELSE 350
+350 IF L$="?" THEN 360 ELSE 600
+360 PRINT "QWERTY-1 Instructions"
+370 PRINT "====Press any key===="
+380 A$=INKEY$:IF A$="" THEN 380
+390 PRINT "say: print characters"
+400 PRINT "mem u: memory used"
+410 PRINT "mem f: free memory"
+420 PRINT "mem t: total memory"
+430 PRINT "ping: PONG!"
+435 A$=INKEY$:IF A$="" THEN 435
+440 PRINT "calc: calculator"
+450 PRINT "menu: loads menu"
+460 PRINT "quit: quits terminal"
+470 PRINT "beep: play sound"
+480 PRINT "?: loads instructions"
+490 PRINT "bday [string]: happy birthday [string]"
+510 A$=INKEY$:IF A$="" THEN 510
+520 PRINT "time: prints time (hh:mm:ss)"
+530 PRINT "date: prints date (day-mm/dd/yy)"
+540 PRINT "ask: prints [question] + ?":GOTO 50000
+600 GOTO 610
+610 IF LEFT$(L$,4)="ask " THEN 620 ELSE 680
+620 K$=RIGHT$(L$,LEN(L$)-4):PRINT K$+"?"
+630 LINE INPUT "Reply:";R$
+670 R$="":GOTO 50000
+680 GOTO 770
+770 IF L$="cquit" THEN 780 ELSE 790
+780 CLS:END
+790 GOTO 830
+830 IF LEFT$(L$,6)="anniv " THEN 840 ELSE 860
+840 A$=RIGHT$(L$,LEN(L$)-6)
+850 PRINT "Happy anniversary, "+A$
+860 IF L$="diy" OR L$="DIY" THEN 870 ELSE 890
+870 PRINT "*************"
+875 PRINT "*HELLO, DIY!*"
+880 PRINT "*************"
+890 IF L$="day" THEN 900 ELSE 970
+900 IF DAY$="Mon" THEN PRINT "Monday" ELSE 910
+910 IF DAY$="Tue" THEN PRINT "Tuesday" ELSE 920
+920 IF DAY$="Wed" THEN PRINT "Wednesday" ELSE 930
+930 IF DAY$="Thu" THEN PRINT "Thursday" ELSE 940
+940 IF DAY$="Fri" THEN PRINT "Friday" ELSE 950
+950 IF DAY$="Sat" THEN PRINT "Saturday" ELSE 960
+960 IF DAY$="Sun" THEN PRINT "Sunday" ELSE GOTO 50000:GOTO 50000
+970 GOTO 20
+50000 GOTO 20
+50010 END
