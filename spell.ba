@@ -1,0 +1,114 @@
+10 'Memory Stretcher
+30 '* Set Random start Point
+40 CLEAR 1000
+50 FOR N=1 TO VAL(RIGHT$(TIME$ ,2))
+60 LE=0
+80 DU=RND(1)
+90 NEXT N
+100 DIM S$(20,5)
+110 DELAY=300
+120 DATA several,some,many,a few,thousands of,these,those
+130 DATA your,my,his,her,America's,no doubt,frequently
+140 DATA sometimes,occasionally,yesterday,today,always,once a month
+150 DATA yellow,red,fat,big,small,large,thin,hungry,sated
+160 DATA predicted,early,late,appreciated,smart,stupid
+170 DATA enthusiastic,rowdy,polite,common,silly
+180 DATA politicians,programmers,elephants,students,swimmers
+190 DATA air traffic controllers,garbage cans,elm trees,German Sheperds,photographers
+200 DATA mice,cheap-skates,hoboes,strangers,relatives
+210 DATA samurai,goats,submarines,cockroaches,writers
+220 DATA corespond,vegetate,select,interpret ,orate
+230 DATA predict,inspire,slaughter,sleep,swim
+240 DATA bark,shout,depart,arrive,investigate
+250 DATA agree,despair,perambulate,perspire,instigate
+260 DATA He thoroughly searched the room until he found it,The dogs bark loudly,They patiently waited for her,She searched the endless bookshelves for the book,He stretched up high to reach it,The dog ran around with his tongue hanging out
+270 DATA He shouted as loud as he could,The voices echoed through the corn maze,They didn't know that the dog was theirs,The dogs were leaping for the food bowl,He told me to say hello to you,The cat made a smart face as it licked its paws
+280 DATA He frantically reached for the door,She thought the band was really loud,Their new horse was hungry,He thought for a long time in his room,She wondered where she had gotten that necklace
+290 DATA He typed it in quickly,She panted and sweated during the race,The animator was late for the meeting,He said hello to the little mouse,The horse neighed loudly,The programmer could't fix the problem,They frantically ran from the angry dogs
+300 CLS:PRINT:PRINT
+310 PRINT TAB(12) "Instructions?"
+320 PRINT
+330 PRINT TAB(16) "Y/N"
+340 A$=INKEY$:IF A$="" THEN 340
+350 IF A$="Y" OR A$="y" THEN GOTO 360
+360 CLS:PRINT
+370 PRINT TAB(2) "Try to remember the phrase, and"
+380 PRINT TAB(2) "type it in. It appears on screen"
+390 PRINT TAB(2) "for shorter time each right guess."
+400 PRINT TAB(2) "Three wrong guesses ends game."
+410 FOR COLUMN=1 TO 5
+420 FOR ROW=1 TO 20
+430 READ S$(ROW,COLUMN)
+440 NEXT ROW
+450 NEXT COLUMN
+460 PRINT
+470 PRINT TAB(9) "= Press any key ="
+480 A$=INKEY$:IF A$="" THEN GOTO 480
+490 IF LOSS=3 GOTO 1070
+500 FOR N=1 TO 5
+510 R=INT(RND(1)*20)+1
+520 S$=S$(R,N)+CHR$(32)
+530 NEXT N
+540 S$=LEFT$(S$,LEN(S$)-1)
+550 S$=S$+"."
+560 CLS:PRINT:PRINT
+570 PRINT TAB(2);
+580 FOR N=1 TO LEN(S$)
+590 IF FLAG=1 THEN GOTO 610
+600 IF N>25 AND MID$(S$,N,1)=CHR$(32) THEN PRINT:PRINT TAB(2);:FLAG=1
+610 PRINT MID$(S$,N,1);
+620 NEXT N
+630 FOR N=1 TO DELAY:NEXT N
+640 FLAG=0
+650 CLS
+660 PRINT "Now retype the sentence:"
+670 LINE INPUT G$
+680 IF G$=S$ THEN GOTO 950
+690 CLS
+710 PRINT TAB(2) "WRONG-You had:"
+720 PRINT TAB(1) "";
+730 FOR N=1 TO LEN(G$)
+740 IF FLAG=1 THEN GOTO 760
+750 IF N>25 AND MID$(G$,N,1)=CHR$(32) THEN PRINT : PRINT TAB(2); :FLAG=1
+760 PRINT MID$(G$,N,1);
+770 NEXT N
+790 FLAG=0
+800 PRINT TAB(2) "Actual sentence:"
+810 'OH YA
+815 PRINT TAB(1) "";
+820 FOR N=1 TO LEN(S$)
+830 IF FLAG=1 THEN GOTO 850
+840 IF N>25 AND MID$(S$,N,1)=CHR$(32) THEN PRINT:PRINT AB(2);:FLAG=1
+850 PRINT MID$(S$,N,1);
+860 NEXT N
+870 PRINT:PRINT TAB(2)"Because you lost, the flash will become longer next time."
+880 DELAY=DELAY*1.25
+890 FLAG=0:S$="":G$=""
+900 PRINT
+910 PRINT TAB(9)"Press a key"
+920 A$=INKEY$:IF A$="" THEN 920
+930 LOSS=LOSS+1
+935 LE=LE-5
+940 GOTO 490
+950 CLS:PRINT
+960 PRINT TAB(12) "Correct!"
+970 PRINT
+980 PRINT "Because this is correct, the flash will be shorter next time."
+990 DELAY=DELAY*.75
+995 LE=LE+10
+1000 FLAG=0
+1010 G$="":S$=""
+1020 PRINT
+1030 PRINT TAB(9) "Press any key"
+1040 A$=INKEY$:IF A$="" THEN GOTO 1040
+1050 LOSS=0
+1055 GOTO 500
+1060 CLS
+1070 CLS:PRINT:PRINT
+1080 PRINT TAB(2)"Sorry, you missed 3 in row."
+1100 PRINT TAB(2) "But you did get to level ";LE
+1110 PRINT
+1120 PRINT TAB(8) "Play again?"
+1130 PRINT TAB(12) "Y/N"
+1140 A$=INKEY$:IF A$="" THEN 1140
+1150 IF A$="y" OR A$="Y" THEN RUN

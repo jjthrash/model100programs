@@ -1,0 +1,91 @@
+0 CLS
+10 PRINT "[Com] QWERTY Server"
+20 PRINT "[Com] 124.22.25.011"
+30 PRINT "[Com]
+80 FOR I=1 TO 1000:NEXT
+90 A$=INKEY$:IF A$="" THEN 90
+100 CLS
+110 'Log-in
+120 PRINT "===Log-in===  ===Register===  ==Quit=="
+130 PRINT
+140 PRINT "Press L       Press R         Press Q"
+150 A$=INKEY$:IF A$="" THEN 150 ELSE 160
+160 IF A$="L" OR A$="l" THEN 1000 ELSE 170
+170 IF A$="R" OR A$="r" THEN 2000 ELSE 180
+180 IF A$="Q" OR A$="q" THEN 500 ELSE 150
+500 PRINT TAB(2)"Are you sure you want to quit?(Y/N)"
+510 A$=INKEY$:IF A$="" THEN 510 ELSE 520
+520 IF A$="n" OR A$="N" THEN 100 ELSE 530
+530 IF A$="Y" OR A$="y" THEN 590 ELSE 54
+540 CLS:GOTO 500
+590 CLS:PRINT "Quitting..."
+600 FOR I=1 TO 200:NEXT
+610 END
+1000 'Non-register Login Point
+1020 CLS
+1030 INPUT "[LogIn] Username";USER$
+1040 INPUT "[LogIn] Password";PASS$
+1050 CLS
+1060 IF USER$="Stingclaw" AND PASS$="sTuDRun3" THEN 5000 ELSE 1065
+1065 IF USER$="jjthrash" AND PASS$="bob" THEN 5000 ELSE 1070
+1070 IF USER$="Daylily" AND PASS$="daylily1" THEN 5000 ELSE 1075
+1075 IF USER$="Teknu DIY" AND PASS$="sTuDRun3" THEN 5000 ELSE 1080
+1080 IF USER$="Veggie Bull" AND PASS$="hourfoim" THEN 5000 ELSE 1085
+1085 IF USER$="Guest" AND PASS$="Guest" THEN 5000 ELSE 1090
+1090 FOR I=1 TO 3
+1100 CLS:PRINT "INVALID"
+1105 FOR O=1 TO 200:NEXT
+1110 CLS
+1120 NEXT I
+1130 PRINT "INVALID"
+1140 FOR R=1 TO 200:NEXT R
+1150 CLS:PRINT "====Redo====  ====Quit===="
+1160 PRINT     "Press R       Press Q"
+1170 A$=INKEY$:IF A$="" THEN 1170:ELSE 1180
+1180 IF A$="r" OR A$="R" THEN 1300 ELSE 1190
+1190 IF A$="q" OR A$="Q" THEN GOTO 1200 ELSE GOTO 1240
+1200 CLS:GOTO 500
+1240 GOTO 1300
+1300 GOTO 1020
+2000 'Registration
+2010 CLS:PRINT "Registration":O=39
+2020 FOR I=1 TO 40
+2030 O=O+1:PRINT@O,"*"
+2035 NEXT
+2040 INPUT "[Reg] Username";RUSER$
+2043 IF RUSER$="Stingclaw" OR RUSER$="Daylily" OR RUSER$="Veggie Bull" OR LEFT$(RUSER$,5)="Teknu" OR RUSER$="jjthrash" THEN 2044 ELSE 2050
+2044 PRINT "That username is taken.		        Please try again.":GOTO 2040
+2050 INPUT "[Reg] Password";RPASS$
+2060 PRINT "[Reg] Loading..."
+2070 FOR I=1 TO 2000:NEXT
+2080 CLS:PRINT "[Error] Connection Unavailable"
+2090 PRINT "> Please contact Stingclaw at TELCOM"
+2100 PRINT "> server U38W2 to report error"
+2110 PRINT "[KeyBase] Press any key to continue"
+2120 A$=INKEY$:IF A$="" THEN 2120
+2130 CLS
+2140 PRINT TAB(2)"==Guest User==  ==Quit==  ==Back=="
+2150 PRINT TAB(2)"Press G	  Press Q   Press B"
+2160 A$=INKEY$:IF A$="" THEN 2160
+2170 IF A$="Q" OR A$="q" THEN 500 ELSE 2180
+2180 IF A$="G" OR A$="g" THEN 2200 ELSE 2190
+2190 IF A$="B" OR A$="b" THEN 0 ELSE 2195
+2195 GOTO 2160
+2200 CLS
+2210 USER$="Guest":GOTO 5000
+5000 CLS:PRINT
+5010 PRINT TAB(2) "Welcome, "+USER$+". "
+5020 PRINT TAB(2) "[Server] Reply action"
+5030 LINE INPUT "[Reply] ";REPLY$
+5040 PRINT TAB(2) "[Error] Attribute in form of program"
+5050 PRINT TAB(2) "[Server] Press any key to continue"
+5060 A$=INKEY$:IF A$="" THEN 5060
+5070 CLS
+5080 PRINT:PRINT TAB(2) "[Server] Program to load?"
+5090 PRINT TAB(2) "[Server] (Without .** extension)"
+5100 LINE INPUT "[Load]>";PROG$
+5103 PRINT TAB(2)"[Instruction] Press F4"
+5105 ON ERROR GOTO 5115
+5110 LOAD PROG$
+5115 CLS:PRINT "[Error] File Not Found":GOTO 5100
+5130 PRINT TAB(2)"[Reply] Press F4"
