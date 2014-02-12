@@ -19,6 +19,7 @@
 160 IF LEFT$(L$,4)="beep" THEN 170 ELSE 210:GOTO 50000
 170 INPUT "Frequency";F
 180 INPUT "Length";LE
+185 IF F>16382 OR F<415 OR LE<1 OR LE>255 THEN PRINT "Invalid Parameters: Please try again." ELSE 190:GOTO 170
 190 SOUND F,LE
 200 GOTO 50000
 210 IF L$="ping" THEN PRINT "PONG!" ELSE GOTO 220:GOTO 50000
@@ -50,7 +51,11 @@
 510 A$=INKEY$:IF A$="" THEN 510
 520 PRINT "time: prints time (hh:mm:ss)"
 530 PRINT "date: prints date (day-mm/dd/yy)"
-540 PRINT "ask: prints [question] + ?":GOTO 50000
+540 PRINT "ask: prints [question] + ?"
+550 PRINT "cquit: quits to command line"
+560 PRINT "time hh:mm:ss: sets time"
+570 PRINT "date mm/dd/yy: sets date"
+580 GOTO 50000
 600 GOTO 610
 610 IF LEFT$(L$,4)="ask " THEN 620 ELSE 680
 620 K$=RIGHT$(L$,LEN(L$)-4):PRINT K$+"?"
@@ -64,9 +69,9 @@
 840 A$=RIGHT$(L$,LEN(L$)-6)
 850 PRINT "Happy anniversary, "+A$
 860 IF L$="diy" OR L$="DIY" THEN 870 ELSE 890
-870 PRINT "*************"
-875 PRINT "*HELLO, DIY!*"
-880 PRINT "*************"
+870 PRINT "***************"
+875 PRINT "* HELLO, DIY! *"
+880 PRINT "***************"
 890 IF L$="day" THEN 900 ELSE 970
 900 IF DAY$="Mon" THEN PRINT "Monday" ELSE 910
 910 IF DAY$="Tue" THEN PRINT "Tuesday" ELSE 920
@@ -75,6 +80,26 @@
 940 IF DAY$="Fri" THEN PRINT "Friday" ELSE 950
 950 IF DAY$="Sat" THEN PRINT "Saturday" ELSE 960
 960 IF DAY$="Sun" THEN PRINT "Sunday" ELSE GOTO 50000:GOTO 50000
-970 GOTO 20
+970 IF LEFT$(L$,2)="s(" OR LEFT$(L$,2)="S(" THEN 980 ELSE 1030
+980 W$=RIGHT$(L$,LEN(L$)-2):R$=LEFT$(W$,LEN(W$)-1)
+990 PRINT W$+"?":LINE INPUT "String: ";S$
+1000 IF LEN(S$)>10 THEN 1010 ELSE 1020
+1010 PRINT W$+" is now '"+LEFT$(S$,7)+"...'":GOTO 50000
+1020 PRINT W$+" is now '"+S$+"'":GOTO 50000
+1030 IF LEFT$(L$,8)="clear s(" AND LEN(L$)>8 THEN 1040 ELSE 1080
+1040 E$=RIGHT$(L$,LEN(L$)-8)
+1050 S$=""
+1060 PRINT W$+" has been cleared.":W$=""
+1080 IF LEFT$(L$,5)="time " AND LEN(L$)=13 THEN 1090 ELSE 1150
+1090 E$=RIGHT$(L$,8):IF MID$(E$,3,1)=":" AND MID$(E$,6,1)=":" THEN 1100 ELSE 50000
+1100 ON ERROR GOTO 1120:TIME$=E$
+1110 PRINT "Completed "+TIME$:GOTO 50000
+1120 PRINT "Error! Invalid Parameters":GOTO 50000
+1150 IF LEFT$(L$,5)="date " AND LEN(L$)=13 THEN 1160 ELSE 1200
+1160 F$=RIGHT$(L$,8):IF MID$(F$,3,1)="/" AND MID$(F$,6,1)="/" THEN 1170 ELSE 50000
+1170 ON ERROR GOTO 1190:DATE$=F$
+1180 PRINT "Completed "+DATE$:GOTO 50000
+1190 PRINT "Error! Invalid Parameters":GOTO 50000
+1200 GOTO 50000
 50000 GOTO 20
 50010 END
