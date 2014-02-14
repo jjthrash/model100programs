@@ -1,0 +1,25 @@
+10 CLS
+20 PRINT "=Stopwatch=    "
+30 PRINT "Press a key"
+50 A$=INKEY$:IF A$="" THEN 50
+100 CLS:PRINT "Enter name for stopwatch (less than 15  characters)"
+110 LINE INPUT ">";NA$
+120 IF LEN(NA$)>15 THEN 130 ELSE 150
+130 PRINT "Invalid: More than 15 characters"
+140 A$=INKEY$:IF A$="" THEN 140:GOTO 100
+150 CLS:PRINT NA$:PRINT
+170 PRINT "==Start==":PRINT "Press S"
+180 A$=INKEY$:IF A$="" THEN 180
+190 IF A$="s" OR A$="S" THEN 200 ELSE 180
+200 CLS:N=0
+220 START$=RIGHT$(TIME$,2)
+230 START=VAL(START$)
+240 IF START$=RIGHT$(TIME$,2) THEN 240 ELSE 250
+250 N=N+1:E$=STR$(N):R$=E$+" seconds"
+255 PRINT@0,"==Stop==":PRINT@40,"Press S"
+257 IF N=1 THEN PRINT@130,"1 second":GOTO 220 ELSE 260
+260 PRINT@130,R$
+270 A$=INKEY$:IF A$="" THEN 270
+280 IF A$="S" OR A
+320 REMpause
+400 REMstop
